@@ -8,5 +8,4 @@ RUN rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
 RUN yum update -y && yum install -y \
 	git \
 	puppet \
-	&& yum clean -y headers \
-	&& yum clean -y packages
+	&& yum clean -y all
