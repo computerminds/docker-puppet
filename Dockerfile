@@ -9,3 +9,10 @@ RUN yum update -y && yum install -y \
 	git \
 	puppet \
 	&& yum clean -y all
+	
+RUN gem install puppet-lint
+RUN mkdir /root/puppet
+COPY entry.sh /root/entry.sh
+WORKDIR /root
+RUN chmod +x entry.sh
+ENTRYPOINT ["./entry.sh"]
