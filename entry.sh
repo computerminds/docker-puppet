@@ -3,20 +3,16 @@
 set -e
 
 echo $1
-echo $2
-echo $3
-echo $4
 
-if [ "$4" = "parser" ]
+if [ "$1" = "parser" ]
 then
-	cd $3 && find -name '*.pp' | xargs -n 1 -t puppet parser validate
-elif [ "$4" = "linter" ]
+	cd puppet/ && find -name '*.pp' | xargs -n 1 -t puppet parser validate
+elif [ "$1" = "linter" ]
 then
-	cd $3 && puppet-lint modules/*
-elif [ "$4" = "ls" ]
+	cd puppet/ && puppet-lint modules/*
+elif [ "$1" = "apply" ]
 then
-	ls
-	ls /root/puppet/*
+	puppet apply --modulepath=/root/puppet/modules/ /root/puppet/manifests/site.pp 
 else 
 	echo "Don't forget to mount the volume. Use 'parser' or 'linter'"
 fi
